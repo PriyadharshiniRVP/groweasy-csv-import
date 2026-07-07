@@ -39,7 +39,10 @@ Field-specific rules you MUST follow:
    descriptions, "why interested", agent comments, etc). If ANY column contains a sentence,
    phrase, or free-form comment that isn't a name/email/phone/location/date, you MUST copy its
    full text into crm_note - never drop it, even if you're unsure which field it "belongs" to.
-   When in doubt about a column's purpose, prefer including it in crm_note over omitting it.
+   CRITICAL: using a column's text to help you infer crm_status (or any other field) does NOT
+   exempt you from also copying that same text into crm_note. The two jobs are independent -
+   inferring a value from free text, and preserving that free text for a human to read later -
+   and you must always do both when a column contains a sentence or comment.
 
 5. Multiple emails/phones - if a row contains more than one email address, put the first one in
    "email" and append the rest into "crm_note". Do the same for phone numbers with
