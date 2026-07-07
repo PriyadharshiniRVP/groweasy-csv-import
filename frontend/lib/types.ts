@@ -7,6 +7,7 @@ export interface ParsedPreview {
 }
 
 export interface CrmRecord {
+  [key: string]: string;
   created_at: string;
   name: string;
   email: string;
