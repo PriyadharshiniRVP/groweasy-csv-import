@@ -33,6 +33,14 @@ function sanitizeRecord(raw) {
     record.crm_status = '';
   }
 
+  // Rule: if the AI left country_code blank but the mobile number is a clean
+  // 10-digit Indian mobile pattern (starts 6-9, no leading country code left
+  // in the digits), default to +91 deterministically instead of leaving this
+  // to the model's judgment call, which isn't perfectly consistent run to run.
+  if (!record.country_code && /^[6-9]\d{9}$/.test(record.mobile_without_country_code)) {
+    record.country_code = '+91';
+  }
+
   // Rule: data_source must be one of the allowed enum values, else blank.
   if (record.data_source && !DATA_SOURCE_VALUES.includes(record.data_source)) {
     record.data_source = '';

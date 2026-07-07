@@ -6,6 +6,25 @@ using an LLM, with a preview/confirm flow and a clear success/skipped breakdown.
 
 Built for the GrowEasy Software Developer (Intern) assignment.
 
+## A note on how this was built
+
+I used AI (Claude) to generate the initial code scaffolding. My own work was testing it against
+deliberately messy, edge-case-heavy datasets, diagnosing exactly where it broke, and fixing both
+the prompt and the validation logic myself. Two concrete examples from that process:
+
+1. **Lost remark text.** The AI would sometimes use a "Stage"/"Status" column to decide
+   `crm_status`, then not also copy that column's original text into `crm_note` — it treated
+   "used for something" as "already handled." I traced this to an ambiguity in the prompt and
+   rewrote the rule so remark text is preserved unconditionally, regardless of what the source
+   column is named.
+2. **Non-deterministic country codes.** `country_code` inference for Indian mobile numbers
+   wasn't fully consistent across identical runs at `temperature: 0`. Rather than prompt-engineer
+   around it further, I moved the check into `validator.js` as a plain regex-based fallback — a
+   field with an obvious deterministic answer shouldn't be left to the model's judgment call.
+
+I can walk through the full architecture, every design decision, and both of these fixes in
+detail if useful.
+
 ## Live pieces
 
 - `frontend/` — Next.js 14 (App Router, TypeScript, Tailwind). Handles upload, client-side
