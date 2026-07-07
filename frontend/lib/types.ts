@@ -7,6 +7,7 @@ export interface ParsedPreview {
 }
 
 export interface CrmRecord {
+  [key: string]: string;
   created_at: string;
   name: string;
   email: string;
@@ -39,7 +40,7 @@ export interface ImportResult {
   failedBatches?: { batchIndex: number; error: string }[];
 }
 
-export const CRM_FIELD_ORDER: (keyof CrmRecord)[] = [
+export const CRM_FIELD_ORDER: string[] = [
   'created_at',
   'name',
   'email',
