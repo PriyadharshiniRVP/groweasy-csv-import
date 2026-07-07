@@ -26,6 +26,18 @@ Field-specific rules you MUST follow:
 1. crm_status - choose the single best match from this fixed list, or "" if nothing fits:
    ${CRM_STATUS_VALUES.join(', ')}
 
+   Use these criteria, based on lead INTENT rather than surface wording:
+   - GOOD_LEAD_FOLLOW_UP: any sign of ongoing interest or a plan to reconnect, even if delayed or
+     soft - "wants callback", "asked for brochure", "maybe later", "revisit next quarter", "budget
+     constraints for now". A future-tense objection is still a lead to follow up, not a bad lead.
+   - BAD_LEAD: explicit disqualification - wrong number, not the target audience, said "not
+     interested" / "no thanks" / "remove me from list" with no reconnect intent at all.
+   - DID_NOT_CONNECT: could not reach the person - no answer, unreachable, no response to
+     outreach attempts. This is about failure to CONTACT, not the lead's opinion.
+   - SALE_DONE: deal/sale explicitly confirmed closed, contract signed, payment received.
+   When genuinely torn between GOOD_LEAD_FOLLOW_UP and BAD_LEAD, prefer GOOD_LEAD_FOLLOW_UP unless
+   the text clearly signals the lead is closed out with no future intent.
+
 2. data_source - choose the single best match from this fixed list, or "" if nothing fits confidently:
    ${DATA_SOURCE_VALUES.join(', ')}
 
@@ -34,15 +46,17 @@ Field-specific rules you MUST follow:
 
 4. crm_note - use this field as a catch-all for: general remarks, follow-up notes, extra phone
    numbers beyond the first, extra email addresses beyond the first, and any other useful
-   information from the row that doesn't map cleanly to another field. This is IMPORTANT: scan
-   EVERY column in the source row for free-text content (comments, remarks, notes, feedback,
-   descriptions, "why interested", agent comments, etc). If ANY column contains a sentence,
-   phrase, or free-form comment that isn't a name/email/phone/location/date, you MUST copy its
-   full text into crm_note - never drop it, even if you're unsure which field it "belongs" to.
-   CRITICAL: using a column's text to help you infer crm_status (or any other field) does NOT
-   exempt you from also copying that same text into crm_note. The two jobs are independent -
-   inferring a value from free text, and preserving that free text for a human to read later -
-   and you must always do both when a column contains a sentence or comment.
+   information from the row that doesn't map cleanly to another field.
+
+4a. MANDATORY, no exceptions: whichever source column's text you used to decide crm_status -
+   whatever that column is named ("Stage", "Status", "Remarks", "Notes", "Comments", or anything
+   else) - copy that column's ORIGINAL text into crm_note as well. Using a column to derive
+   crm_status does NOT mean that column is "already handled" - crm_status is a lossy 4-value
+   category picked FROM the text, never a substitute for the text itself. This applies even when
+   the column name looks like an official status field (e.g. literally named "Stage" or "Status").
+   The only time you may leave crm_note empty for this is if that source column was already blank,
+   or its text is 100% identical to the enum value with zero extra information (e.g. the cell
+   literally just says "Sale Done" and nothing more).
 
 5. Multiple emails/phones - if a row contains more than one email address, put the first one in
    "email" and append the rest into "crm_note". Do the same for phone numbers with

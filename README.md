@@ -125,6 +125,3 @@ marketing page — so it's a dark, monospace-accented interface with a real 4-st
   fine into the low thousands but not beyond).
 - Unit tests around `validator.js` and `csvParser.js`, since those encode the actual business
   rules and are the cheapest place to catch regressions.
-
-## Note
-A note on process: I used Claude (Anthropic) as a coding assistant throughout this project — for scaffolding the frontend/backend structure, drafting the AI extraction prompt, and the validation logic. All architecture decisions, testing, and the final review were mine.  
