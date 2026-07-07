@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: #0e1015;
+  background-image: radial-gradient(circle at 20% -10%, rgba(108, 108, 245, 0.10), transparent 40%),
+    radial-gradient(circle at 100% 0%, rgba(245, 166, 35, 0.06), transparent 35%);
+}
+
+::selection {
+  background: rgba(108, 108, 245, 0.35);
+}
+
+/* Sticky table headers */
+.sticky-th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Thin scrollbars for the data tables, kept subtle so they don't compete
+   with the content they scroll. */
+.thin-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: #272b36;
+  border-radius: 999px;
+}
+.thin-scroll::-webkit-scrollbar-thumb:hover {
+  background: #363c4b;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-start infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink { animation: none; }
+}

@@ -1,0 +1,6 @@
+Lead Date,Full Name,Contact Email,Alt Email,Phone,Alt Phone,Organisation,Town,Region,Nation,Assigned To,Stage,Remarks,Campaign,Ready To Move
+2026-06-01 09:15:00,Anita Rao,anita.rao@example.com,,+91 9000011111,,Skyline Realty,Chennai,Tamil Nadu,India,owner1@groweasy.ai,Follow up scheduled,Wants a 2BHK site visit next week,leads_on_demand,6 months
+2026-06-01 10:02:11,Vikram Shah,vikram.shah@example.com,vikram.s.alt@example.com,9000022222,9000099999,,Ahmedabad,Gujarat,India,owner1@groweasy.ai,Not reachable after 3 tries,,eden_park,
+2026-06-01 11:45:30,,,,,,,,,,,,No contact info at all - should be skipped,,,,
+2026-06-01 12:20:05,Meera Nair,meera.nair@example.com,,+919000033333,,Palm Grove Estates,Kochi,Kerala,India,owner2@groweasy.ai,Deal closed - paperwork in progress,Very happy client,varah_swamy,Immediate
+2026-06-01 13:05:44,Karthik Iyer,,,9000044444,,,Bengaluru,Karnataka,India,owner2@groweasy.ai,"Genuinely interested, wants brochure emailed",sarjapur_plots,12 months
